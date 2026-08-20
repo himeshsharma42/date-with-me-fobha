@@ -1,0 +1,82 @@
+const yesBtn = document.getElementById("yesBtn");
+const noBtn = document.getElementById("noBtn");
+
+const questionScreen = document.getElementById("question-screen");
+const successScreen = document.getElementById("success-screen");
+
+const message = document.getElementById("message");
+
+let noCount = 0;
+
+const noMessages = [
+    "Are you sure? 🥺",
+    "Think again... ❤️",
+    "Really?? 😭",
+    "You can't escape this easily 😌",
+    "Try clicking YES instead 👀",
+    "I know you want to say YES ❤️"
+];
+
+noBtn.addEventListener("click", function () {
+
+    noCount++;
+
+    message.textContent =
+        noMessages[Math.min(noCount - 1, noMessages.length - 1)];
+
+    if (noCount >= 3) {
+
+        noBtn.style.position = "absolute";
+
+        const x = Math.random() * (window.innerWidth - 150);
+        const y = Math.random() * (window.innerHeight - 100);
+
+        noBtn.style.left = `${x}px`;
+        noBtn.style.top = `${y}px`;
+    }
+
+});
+
+yesBtn.addEventListener("click", function () {
+
+    questionScreen.classList.add("hidden");
+    successScreen.classList.remove("hidden");
+
+    createHearts();
+});
+
+function createHearts() {
+
+    for (let i = 0; i < 30; i++) {
+
+        setTimeout(() => {
+
+            const heart = document.createElement("div");
+
+            heart.classList.add("floating-heart");
+
+            heart.textContent = "❤️";
+
+            heart.style.left = Math.random() * 100 + "vw";
+
+            heart.style.animationDuration =
+                (3 + Math.random() * 3) + "s";
+
+            document.getElementById("hearts")
+                .appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 6000);
+
+        }, i * 100);
+    }
+}
+
+function celebrate() {
+
+    alert(
+        "Okay, now get ready because I'm taking you on the best date ever. ❤️🥰"
+    );
+
+}
